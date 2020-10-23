@@ -26,14 +26,10 @@ let circ = {x: 350, y:350}
 
 
 
-window.addEventListener('mousedown', e => {
-    flex = tutorial_canvas.getBoundingClientRect();
-    xs = e.clientX - flex.left;
-    ys = e.clientY - flex.top;
-    tip.x = xs
-    tip.y = ys
-    tip.body = tip
-    tutorial_canvas_context.clearRect(0,0,tutorial_canvas.width, tutorial_canvas.height)
+window.addEventListener('keydown', e => {
+    if(e.key == "x"){
+        tutorial_canvas_context.clearRect(0,0,tutorial_canvas.width, tutorial_canvas.height)
+    }
 
 
 });

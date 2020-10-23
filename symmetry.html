@@ -26,8 +26,9 @@
       <aside class="gamepage-left-aside">
         <h2>Symmetry</h2>
         <ul>
-            <li> Move mouse to draw.</li>
-            <li> Click to clear.</li> 
+            <li> Click and move mouse to draw.</li>
+            <li> Let go to stop drawing.</li>
+            <li> Press x to clear.</li> 
           <input step="1"type="range" min="1" max="16" value="6" class="slider-squarex"id="rot"> 
       <label for="x-dim">Angles</label>
       <input type="text" id = "color">   <label for="color">Color</label>
@@ -123,6 +124,9 @@
   };
 
 let interval = 2;
+
+$(tutorial_canvas).on('mousedown', function(e)
+    {  
     $(tutorial_canvas)
     .on('mousemove', $.throttle(interval, function(e)
     {  
@@ -146,7 +150,14 @@ let interval = 2;
           circ.spindraw(oldcirc)
       
   
-    }));
+    }))
+    });
+    
+$(window).on('mouseup', function () {
+    $(tutorial_canvas).off('mousemove');
+//   alert("ok, removed");
+ oldcirc = {x: 350, y:350}
+});
     </script>
 </div id="go">
       </div>
