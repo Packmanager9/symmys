@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+
+  <div class="gamepage-wrapper">
+
+    <!-- Basic header. Should hold simple branding and navigation. -->
+    <header class="gamepage-header">
+      <!-- Image provided by Eucalyp Studio in Artificial Intelligence from https://www.iconfinder.com/iconsets/artificial-intelligence-6 -->
+      <!-- <img id="site-logo" src="assets/iconfinder_ArtificialIntelligence29_2890576_blackwhite.png"> -->
+      <ul class="nav-content">
+        <!-- <li class="nav-list-item"><a class="nav-link-text" href="">Home</a></li> -->
+        <li class="nav-list-item"><a class="nav-link-text" href="http://ditzbitz.com/games.html">Games</a></li>
+        <!-- <li class="nav-list-item"><a class="nav-link-text" href="https://www.linkedin.com/in/cole-ditzler-41b160133/" target="_blank">About</a></li> -->
+      </ul>
+    </header>
+
+    <!-- Container for page content. Contains and aligns instructions, game, and ads. -->
+    <div class="game-content-container">
+      
+      <!-- Left side banner. Should contain instuctions for the game. -->
+      <aside class="gamepage-left-aside">
+        <h2>Symmetry</h2>
+        <ul>
+            <li> Move mouse to draw.</li>
+            <li> Click to clear.</li> 
+          <input step="1"type="range" min="1" max="16" value="6" class="slider-squarex"id="rot"> 
+      <label for="x-dim">Angles</label>
+      <input type="text" id = "color">   <label for="color">Color</label>
+        </ul>
+      </aside>
+    
+      <!-- Game container. Holds the game for this page scaled to fit.  -->
+ 
+      <div class="game-container">
+        
+  <div id="dog-image-container">
+
+    <canvas  id="tutorial" width="700" height="700"></canvas>
+
+    <script src="symmetry.js"></script><script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <script>
+     $.throttle = jq_throttle = function( delay, no_trailing, callback, debounce_mode ) {
+    // After wrapper has stopped being called, this timeout ensures that
+    // `callback` is executed at the proper times in `throttle` and `end`
+    // debounce modes.
+    var timeout_id,
+      
+      // Keep track of the last time `callback` was executed.
+      last_exec = 0;
+    
+    // `no_trailing` defaults to falsy.
+    if ( typeof no_trailing !== 'boolean' ) {
+      debounce_mode = callback;
+      callback = no_trailing;
+      no_trailing = undefined;
+    }
+    
+    // The `wrapper` function encapsulates all of the throttling / debouncing
+    // functionality and when executed will limit the rate at which `callback`
+    // is executed.
+    function wrapper() {
+      var that = this,
+        elapsed = +new Date() - last_exec,
+        args = arguments;
+      
+      // Execute `callback` and update the `last_exec` timestamp.
+      function exec() {
+        last_exec = +new Date();
+        callback.apply( that, args );
+      };
+      
+      // If `debounce_mode` is true (at_begin) this is used to clear the flag
+      // to allow future `callback` executions.
+      function clear() {
+        timeout_id = undefined;
+      };
+      
+      if ( debounce_mode && !timeout_id ) {
+        // Since `wrapper` is being called for the first time and
+        // `debounce_mode` is true (at_begin), execute `callback`.
+        exec();
+      }
+      
+      // Clear any existing timeout.
+      timeout_id && clearTimeout( timeout_id );
+      
+      if ( debounce_mode === undefined && elapsed > delay ) {
+        // In throttle mode, if `delay` time has been exceeded, execute
+        // `callback`.
+        exec();
+        
+      } else if ( no_trailing !== true ) {
+        // In trailing throttle mode, since `delay` time has not been
+        // exceeded, schedule `callback` to execute `delay` ms after most
+        // recent execution.
+        // 
+        // If `debounce_mode` is true (at_begin), schedule `clear` to execute
+        // after `delay` ms.
+        // 
+        // If `debounce_mode` is false (at end), schedule `callback` to
+        // execute after `delay` ms.
+        timeout_id = setTimeout( debounce_mode ? clear : exec, debounce_mode === undefined ? delay - elapsed : delay );
+      }
+    };
+    
+    // Set the guid of `wrapper` function to the same of original callback, so
+    // it can be removed in jQuery 1.4+ .unbind or .die by using the original
+    // callback as a reference.
+    if ( $.guid ) {
+      wrapper.guid = callback.guid = callback.guid || $.guid++;
+    }
+    
+    // Return the wrapper function.
+    return wrapper;
+  };
+
+let interval = 2;
+    $(tutorial_canvas)
+    .on('mousemove', $.throttle(interval, function(e)
+    {  
+        
+      flex = tutorial_canvas.getBoundingClientRect();
+      xs = e.clientX - flex.left;
+      ys = e.clientY - flex.top;
+      tip.x = xs
+      tip.y = ys
+      tip.body = tip
+  
+  
+      if(typeof oldcirc.radius != 'number'){
+          oldcirc = circ
+          oldcirc.x = tip.x
+          oldcirc.y = tip.y
+      }
+  
+          oldcirc = circ
+           circ = new Bosscircle(tip.x,tip.y, 3, bigcolor)
+          circ.spindraw(oldcirc)
+      
+  
+    }));
+    </script>
+</div id="go">
+      </div>
+    
+      <!-- Right side banner. No content for now. Perhaps ad-space in the future. -->
+      <aside class="gamepage-right-aside">
+        <!-- Add content here later. -->
+      </aside>
+    </div>
+
+    <!-- Simple footer. Just a copyright notice. -->
+    <footer class="games-footer">
+    </footer>
+
+  </div>
+</html>
